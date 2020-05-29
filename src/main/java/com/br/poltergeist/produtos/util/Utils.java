@@ -15,10 +15,8 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.time.temporal.IsoFields;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
+import java.time.temporal.TemporalAccessor;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Utils {
@@ -67,6 +65,7 @@ public class Utils {
     public static String formatarInstantDiaMes(Instant dataHora) {
         return String.valueOf(dataHora.atZone(ZONE_PADRAO).getDayOfMonth());
     }
+
     public static String formatarInstant(Instant dataHora, String formato) {
         if (dataHora == null) {
             return StringUtils.EMPTY;
@@ -76,6 +75,20 @@ public class Utils {
         }
         return DateTimeFormatter.ofPattern(formato).withZone(ZONE_PADRAO).format(dataHora);
     }
+    public static String formatarDateData(Date dataHora){
+        return formatarDate(dataHora, FORMATO_PADRAO_DATA);
+    }
+    public static String formatarDate(Date dataHora, String formato){
+        if(dataHora==null){
+            return StringUtils.EMPTY;
+        }
+        if(StringUtils.isBlank(formato)){
+            throw new IllegalArgumentException("Formato é obrigatório.");
+        }
+        return DateTimeFormatter.ofPattern(formato).withZone(ZONE_PADRAO).format((TemporalAccessor) dataHora);
+    }
+
+
     public static Month getCurrentMonth() {
         return getMonth(Instant.now());
     }
@@ -219,10 +232,15 @@ public class Utils {
     public static Integer getIntegerOrZero(Object obj) {
         return obj instanceof Number ? ((Number) obj).intValue() : 0;
     }
-
     public static BigDecimal getBigDecimalOrZero(Object obj) {
         return obj instanceof BigDecimal ? (BigDecimal) obj : BigDecimal.ZERO;
     }
+    /*public static String getStringOrNull(Object obj){
+        return obj instanceof String ? (String) obj : null;
+    }
+    public static GeneroEnum getGeneroEnumOrNull(Object obj){
+        return obj instanceof GeneroEnum ? (GeneroEnum) obj :null;
+    }*/
 
 }
 

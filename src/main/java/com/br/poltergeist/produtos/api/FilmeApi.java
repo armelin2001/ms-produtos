@@ -1,10 +1,10 @@
 package com.br.poltergeist.produtos.api;
 
 import com.br.poltergeist.produtos.constants.GeneroEnum;
+import com.br.poltergeist.produtos.model.filme.Filme;
 import com.br.poltergeist.produtos.model.filme.RetornoFilme;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
@@ -25,4 +25,13 @@ public interface FilmeApi {
                                                     @Valid @RequestParam(value = "camposTextoLivre", required = false) List<String> camposTextoLivre,
                                                     @Valid @RequestParam(value = "ordenacao", required = false) List<String> ordenacao,
                                                     @Valid @RequestParam(value = "tipoRetorno", required = false) String tipoRetorno);
+
+    @PostMapping(value = "/filme", produces = {"application/json"}, consumes = {"application/json"})
+    ResponseEntity<RetornoFilme> criarFilme(@RequestBody Filme filme);
+
+    @DeleteMapping(value = "/filme")
+    ResponseEntity<RetornoFilme> deletarFilme();
+
+
+
 }

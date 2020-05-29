@@ -2,6 +2,7 @@ package com.br.poltergeist.produtos.model.filme;
 
 import com.br.poltergeist.produtos.constants.GeneroEnum;
 import com.br.poltergeist.produtos.model.BaseModel;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -18,7 +19,6 @@ import java.util.Date;
 @Table
 @Entity
 public class Filme extends BaseModel {
-
 
     @Id
     @NotNull(message = "O id do filme não pode ser nulo")
@@ -48,7 +48,10 @@ public class Filme extends BaseModel {
 
     @NotNull(message = "O campo data de lançamento não pode ser nulo")
     @Column(name = "DATA_LACAMENTO")
+    @JsonFormat(pattern="dd/MM/yyyy")
+    @Temporal(TemporalType.DATE)
     private Date dataLancamento;
+
     public Long getIdFilme() {
         return idFilme;
     }

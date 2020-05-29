@@ -1,8 +1,9 @@
 package com.br.poltergeist.produtos.api;
 
 import com.br.poltergeist.produtos.constants.GeneroEnum;
+import com.br.poltergeist.produtos.model.filme.Filme;
 import com.br.poltergeist.produtos.model.filme.RetornoFilme;
-import com.br.poltergeist.produtos.service.FilmeService;
+import com.br.poltergeist.produtos.service.filmeService.FilmeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import java.util.List;
 public class FilmeApiController implements FilmeApi{
     @Autowired
     private FilmeService filmeService;
+
     @Override
     public ResponseEntity<RetornoFilme> getFilmesPorFiltro(@NotNull @Valid Integer pagina, @NotNull @Max(500) @Valid Integer tamanhoPagina, @Valid Long idFilme,
                                                            @Valid List<GeneroEnum> generos, @Valid String descricaoFilme, @Valid Date dataLancamento,
@@ -24,4 +26,11 @@ public class FilmeApiController implements FilmeApi{
         RetornoFilme retorno = this.filmeService.getFilmePorFiltro(pagina, tamanhoPagina, idFilme, generos, descricaoFilme, dataLancamento, textoLivre, camposTextoLivre, ordenacao, tipoRetorno);
         return ResponseEntity.ok(retorno);
     }
+
+    @Override
+    public ResponseEntity<RetornoFilme> criarFilme(Filme filme) {
+        RetornoFilme retorno = this.filmeService.criarFilme(filme);
+        return ResponseEntity.ok(retorno);
+    }
+
 }

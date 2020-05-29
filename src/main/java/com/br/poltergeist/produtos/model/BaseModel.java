@@ -1,17 +1,18 @@
 package com.br.poltergeist.produtos.model;
 
 import com.br.poltergeist.produtos.model.converter.BooleanToStringConverter;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.MappedSuperclass;
-import java.time.Instant;
+import javax.persistence.*;
+import java.util.Date;
 
 @MappedSuperclass
 public abstract class BaseModel {
 
     @Column(updatable = false)
-    private Instant dataInclusao;
+    @JsonFormat(pattern="dd/MM/yyyy")
+    @Temporal(TemporalType.DATE)
+    private Date dataInclusao = new Date(System.currentTimeMillis());
 
     @Convert(converter = BooleanToStringConverter.class)
     @Column(length = 1)
@@ -20,11 +21,11 @@ public abstract class BaseModel {
     }
     public abstract boolean isNew();
 
-    public Instant getDataInclusao() {
-        return dataInclusao;
+    public Date getDataInclusao() {
+        return dataInclusao = new Date(System.currentTimeMillis());
     }
 
-    public void setDataInclusao(Instant dataInclusao) {
+    public void setDataInclusao(Date dataInclusao) {
         this.dataInclusao = dataInclusao;
     }
 

@@ -2,7 +2,7 @@ package com.br.poltergeist.produtos.model.converter;
 
 import javax.persistence.AttributeConverter;
 
-public class BooleanToStringConverter implements AttributeConverter<Boolean, String> {
+public class BooleanToStringConverter implements AttributeConverter<Boolean, String>{
     @Override
     public String convertToDatabaseColumn(Boolean attribute) {
         if(attribute == null) {

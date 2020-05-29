@@ -11,7 +11,6 @@ import javax.validation.constraints.NotNull;
 public class Retorno {
     private Integer codigo;
     private String mensagem;
-    private String detalhe;
     private Integer pagina;
     private Integer tamanhoPagina;
     private Integer totalRegistros;
@@ -31,14 +30,6 @@ public class Retorno {
 
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
-    }
-
-    public String getDetalhe() {
-        return detalhe;
-    }
-
-    public void setDetalhe(String detalhe) {
-        this.detalhe = detalhe;
     }
 
     public Integer getPagina() {
